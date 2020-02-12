@@ -4,8 +4,8 @@ import {
   Route,
   Switch,
   Redirect
-} from 'react-router-dom'
-import axios from 'axios'
+} from 'react-router-dom';
+import axios from 'axios';
 
 // Component Import
 import Search from './components/search.js'
@@ -15,13 +15,15 @@ import ErrorRoute from './components/errorRoute'
 
 import apiKey from './config.js'
 
+const navItems =['Airplanes', 'Dogs', 'Birds']
+
 class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       searchedPhotos: [],
-      tag: "",
+      query: "",
       loading: true
     }
   }
@@ -30,14 +32,14 @@ class App extends React.Component {
     this.performSearch();
   }
 
-  performSearch = (query = 'cats') => {
+  performSearch = (query = navItems[0]) => {
     axios.get(
       `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&safe_search=1&per_page=24&format=json&nojsoncallback=1`
     )
       .then(response => {
         this.setState({
           searchedPhotos: response.data.photos.photo,
-          tag: query,
+          query: query,
           loading: false
         });
       })
@@ -52,11 +54,12 @@ class App extends React.Component {
       <BrowserRouter>
         <div className="container">
           <Search onSearch={this.performSearch} isLoading={this.state.loading}/>
-          <Nav onSearch={this.performSearch}/>
+          <Nav onSearch={this.performSearch} navItems={navItems}/>
 
           <Switch>
-            <Route exact path="/" render={() => <Redirect to="/search/cats" />} />
-            <Route exact path="/search/:tag" render={() => <PhotoContainer tag={`${this.state.tag}`} results={this.state.searchedPhotos} isLoading={this.state.loading}/> } />
+            <Route exact path="/" render={() => <Redirect to="/search/" />} />
+            <Route exact path="/search" render={() => <PhotoContainer results={this.state.searchedPhotos} isLoading={this.state.loading} onSearch={this.performSearch} />} />
+            <Route path={`/search/:query`} render={() => <PhotoContainer results={this.state.searchedPhotos} isLoading={this.state.loading} onSearch={this.performSearch} /> } />
             <Route componenet={ErrorRoute} />
           </Switch>
 
