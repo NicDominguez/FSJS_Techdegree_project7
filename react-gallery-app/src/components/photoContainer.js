@@ -5,12 +5,14 @@ import Photo from './photo.js'
 import NotFound from './notFound.js'
 
 const PhotoContainer = (props) => {
+    console.log("photo Container", props)
+
     const data = props.results
     const title = props.match.params.tag
     const photoComponenets = []
 
-    if (props.results.length > 0) {
-        for (let i = 0; i < props.results.length; i++) {
+    if (data.length > 0) {
+        for (let i = 0; i < data.length; i++) {
             let url = `https://farm${data[i].farm}.staticflickr.com/${data[i].server}/${data[i].id}_${data[i].secret}.jpg`
             photoComponenets.push(
                 <Photo url={url} key={data[i].id} />
