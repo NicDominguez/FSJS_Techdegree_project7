@@ -72,8 +72,8 @@ class App extends React.Component {
 
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/search/" />} />
-            <Route exact path="/search" render={() => <PhotoContainer results={this.state.searchedPhotos} isLoading={this.state.loading} onSearch={this.performSearch} />} />
-            <Route path={`/search/:query`} render={() => <PhotoContainer results={this.state.searchedPhotos} isLoading={this.state.loading} onSearch={this.performSearch} /> } />
+            <Route exact path="/search" render={() => <PhotoContainer results={this.state.searchedPhotos} isLoading={this.state.loading} onSearch={this.performSearch} query={this.state.query} />} />
+            <Route path={`/search/:query`} render={() => <PhotoContainer results={this.state.searchedPhotos} isLoading={this.state.loading} onSearch={this.performSearch} query={this.state.query} /> } />
             <Route component={ErrorRoute} />
           </Switch>
 

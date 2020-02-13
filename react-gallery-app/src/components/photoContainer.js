@@ -5,7 +5,6 @@ import Photo from './photo.js'
 import NotFound from './notFound.js'
 
 const PhotoContainer = (props) => {
-    console.log("photo Container", props)
 
     const data = props.results
     const title = props.match.params.tag
@@ -28,7 +27,7 @@ const PhotoContainer = (props) => {
                 ? <p className="loading">Photos are loading....</p>
                 :
                 <Fragment>
-                    <h2>{title}</h2>
+                    <h2>{props.query}</h2>
                     <ul>
                         {photoComponenets}
                     </ul>
