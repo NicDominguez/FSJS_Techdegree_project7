@@ -1,3 +1,4 @@
+// library Import
 import React from 'react'
 import { withRouter } from 'react-router-dom';
 
@@ -7,10 +8,12 @@ class Search extends React.Component {
         query: ""
     }
 
+    //sets query state to value of input
     onSearchChange = e => {
         this.setState({ query: e.target.value})
     }
 
+    // pushes path to history object then performs search on query string
     handleSubmit = e => {
         e.preventDefault();
         let path = `/search/${this.state.query}`;
@@ -19,6 +22,7 @@ class Search extends React.Component {
         e.currentTarget.reset();
     }
 
+    // renders search form
     render() {
         return (
             <form className="search-form" onSubmit={this.handleSubmit}>

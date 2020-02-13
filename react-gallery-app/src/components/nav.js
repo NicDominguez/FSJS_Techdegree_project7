@@ -1,9 +1,11 @@
+// library Import
 import React from 'react'
 import {
   BrowserRouter,
   NavLink
 } from 'react-router-dom'
 
+// Renders NavLink buttons with items from the navItems array
 const Nav = (props) => {
     return (
       <BrowserRouter>

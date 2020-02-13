@@ -1,3 +1,4 @@
+// library Import
 import React from 'react';
 import {
   BrowserRouter,
@@ -13,8 +14,10 @@ import Nav from './components/nav.js'
 import PhotoContainer from './components/photoContainer.js';
 import ErrorRoute from './components/errorRoute'
 
+// API Key Import
 import apiKey from './config.js'
 
+// Sets nav items to display
 const navItems =['Airplanes', 'Dogs', 'Birds']
 
 class App extends React.Component {
@@ -27,11 +30,12 @@ class App extends React.Component {
       loading: true
     }
   }
-
+  // Performs initial search on default value when componenet mounts
   componentDidMount() {
     this.performSearch();
   }
 
+  // Performs search on query string in url upon change in browswer window popstate
   componentDidUpdate() {
     window.onpopstate = (e) => {
       console.log(window.location.href)
@@ -46,6 +50,7 @@ class App extends React.Component {
     }
   }
 
+  // Function to retrieve flicker data based on query and update state with new values
   performSearch = (query = navItems[0]) => {
     this.setState({query: query})
     axios.get(
@@ -63,6 +68,7 @@ class App extends React.Component {
     this.setState({ loading: true });
   }
 
+  // Renders all componenets and uses switch router to create routes matching home page and search query pages
   render() {
     return (
       <BrowserRouter>
